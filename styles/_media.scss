@@ -1,6 +1,6 @@
 
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 740px){
     header{
         padding: 0;
     }
@@ -50,9 +50,14 @@
     }
 
     .section{
-        padding: 2rem 2.5rem ;
+        padding: 1rem 2rem ;
     }
-
+    .sec1{
+        padding: 0 0;
+    }
+    .sec2{
+        padding-bottom: 7rem;
+    }
     .theam-btn{
         width: 50px;
         height: 50px;
@@ -98,6 +103,9 @@
         transform: translateX(-50%);
         width: 100%;
         background-color: var(--color-gray-5);
+        .active-btn {
+    transform: translateY(-10px);
+  }
         .control{
             margin: 1rem .3rem;
         }
@@ -142,4 +150,19 @@
             }
         }
     }
+}
+
+@media (max-width: 768px) {
+  .main-title {
+    margin-top: 1.8rem;
+    h2 {
+      &::after {
+        width: 48px;
+        bottom: -0.9rem;
+      }
+      .bg-text {
+        font-size: clamp(2.8rem, 18vw, 4.5rem);
+      }
+    }
+  }
 }

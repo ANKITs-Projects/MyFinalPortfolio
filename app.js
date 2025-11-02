@@ -21,7 +21,6 @@ function PageTransitions(){
             sectBtns.forEach((btn) => {
                 btn.classList.remove('active')
             })
-            e.target.classList.add('active')
             sections.forEach((sec)=>{
                 sec.classList.remove('active')
             })
@@ -31,10 +30,24 @@ function PageTransitions(){
     })
     // Toggle theam
     const theambtn = document.querySelector(".theam-btn")
+
+    function updateThemeIcon(){
+        if(document.body.classList.contains('ligth-mode')){
+            theambtn.title = "Dark"
+            theambtn.innerHTML = '<i class="fa-solid fa-moon"></i>'
+        }
+        else{
+            theambtn.title = "Light"
+            theambtn.innerHTML = '<i class="fa-solid fa-sun"></i>'
+        }
+    }
+
     theambtn.addEventListener('click', ()=>{
-        let element = document.body;
-        element.classList.toggle('ligth-mode')
+        document.body.classList.toggle("ligth-mode");
+        updateThemeIcon()
     })
+
+    updateThemeIcon()
 }
 
 PageTransitions()
@@ -45,11 +58,11 @@ function sendMail(e){
     const hours = String(now.getHours()).padStart(2,'0');
     const minutes = String(now.getMinutes()).padStart(2,'0');
     const seconds = String(now.getSeconds()).padStart(2,'0');
-    const senderName = document.getElementById('name').value;
+    const senderName = document.getElementById('input-name').value;
     let params = {
         name : senderName,
-        email : document.getElementById("email").value,
-        message : document.getElementById("message").value,
+        email : document.getElementById("input-email").value,
+        message : document.getElementById("input-message").value,
         time : `${hours}:${minutes}:${seconds}`
     };
 
