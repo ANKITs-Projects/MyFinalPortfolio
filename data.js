@@ -7,10 +7,10 @@ fetch(configUrl)
     return res.json();
   })
   .then((data) => {
-    console.log(data);
     document.getElementById("role").innerText = data.role;
     document.getElementById("landingPageLine").innerText = data.landingPageLine;
     document.getElementById("profileImage").src = data.profileImage;
+    // document.getElementById("iconTag").href = data.profileImage;
     document.querySelectorAll(".resume").forEach((e) => (e.href = data.resume));
 
     // for about section
