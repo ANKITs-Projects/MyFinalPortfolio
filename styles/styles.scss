@@ -206,8 +206,11 @@ section {
       border-radius: var(--br-sm-2);
       height: 90%;
       width: 58%;
+      border-radius: 70%;
+      overflow: hidden;
       margin-left: 4rem;
       // background-color: var(--color-balck);
+      box-shadow: 0 2px 4px 0 #41a49a66, 0 2px 16px 0 #fffc;
       transition: all 0.4s ease-in-out;
       display: flex;
       align-items: center;
@@ -215,6 +218,7 @@ section {
       img {
         width: 400px;
         height: 100%;
+        
         object-fit: cover;
         transition: all 0.4s ease-in-out;
       }
