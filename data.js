@@ -22,7 +22,7 @@ fetch(configUrl)
       let div = document.createElement("div");
       div.className = "timeline-item";
       div.innerHTML = `<div class="tl-icon">
-              <i class="fas fa-briefcase"></i>
+              <i class="fa-solid fa-user-graduate"></i>
             </div>
             <p class="tl-duration">${e.year}</p>
             <h5>${e.degree}</h5>

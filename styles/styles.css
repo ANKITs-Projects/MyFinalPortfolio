@@ -341,7 +341,7 @@ section {
 }
 .timeline .timeline-item h5 {
   padding: 1rem 0;
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-size: 1.3rem;
   font-weight: 600;
 }
@@ -351,6 +351,7 @@ section {
   font-size: 1.2rem;
 }
 .timeline .timeline-item p {
+  text-transform: capitalize;
   color: var(--color-gray-2);
 }
 
@@ -585,6 +586,8 @@ section {
 }
 .contact-content-con .left-contact .contact-icons a:hover {
   background-color: var(--color-secondary);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 .contact-content-con .left-contact .contact-icons a:hover i {
   color: var(--color-primary);
