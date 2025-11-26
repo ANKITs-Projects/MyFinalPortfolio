@@ -14,15 +14,23 @@
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
   </head>
   <body class="main-content">
-    <!-- Home Landing Section Header -->
-    <header class="section sec1 active" id="home">
+    
+    <nav class="navbar">
+        <div class="nav-logo">Ankit<span>.</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#portfolio">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="theam-btn" title="Theme"></div>
+    </nav>
+
+    <header class="section" id="home">
       <div class="header-content">
         <div class="left-header">
           <div class="h-shape"></div>
@@ -46,11 +54,9 @@
       </div>
     </header>
 
-    <!-- All other section In main -->
     <main>
-      <!-- About Section -->
-      <section class="section sec2" id="about">
-        <div class="main-title">
+      <section class="section" id="about">
+        <div class="main-title stat-title">
           <h2>About <span>me</span> <span class="bg-text">About Me</span></h2>
         </div>
 
@@ -65,66 +71,26 @@
               </a>
             </div>
           </div>
-
-          <!-- <div class="right-about">
-            <div class="about-item">
-              <div class="abt-text">
-                <p class="large-text">560+</p>
-                <p class="small-text">
-                  Projects <br />
-                  Comleted
-                </p>
-              </div>
-            </div>
-            <div class="about-item">
-              <div class="abt-text">
-                <p class="large-text">560+</p>
-                <p class="small-text">
-                  Projects <br />
-                  Comleted
-                </p>
-              </div>
-            </div>
-            <div class="about-item">
-              <div class="abt-text">
-                <p class="large-text">560+</p>
-                <p class="small-text">
-                  Projects <br />
-                  Comleted
-                </p>
-              </div>
-            </div>
-            <div class="about-item">
-              <div class="abt-text">
-                <p class="large-text">560+</p>
-                <p class="small-text">
-                  Projects <br />
-                  Comleted
-                </p>
-              </div>
-            </div>
-          </div> -->
         </div>
-
-        <h4 class="stat-title">Education</h4>
+        <div class="main-title stat-title">
+          <h5>Educa<span>tion</span> <span class="bg-text">Education</span></h5>
+        </div>
         <div class="timeline" id="education"></div>
 
-        <h4 class="stat-title">My Skills</h4>
+
+        <div class="main-title stat-title">
+          <h5>My<span>Skills</span> <span class="bg-text">My Skills</span></h5>
+        </div>
         <div class="skillsCart">
           <div>
-            <h3>tech-Stack</h3>
+            <h3>Tech Stack & Tools</h3>
             <div class="about-skills" id="techStack"></div>
-          </div>
-          <div>
-            <h3>tech-Tools</h3>
-            <div class="about-skills" id="techTools"></div>
           </div>
         </div>
       </section>
 
-      <!-- Portfolio Section -->
-      <section class="section sec3" id="portfolio">
-        <div class="main-title">
+      <section class="section" id="portfolio">
+        <div class="main-title stat-title">
           <h2>
             My <span>Projects</span> <span class="bg-text">my Projects</span>
           </h2>
@@ -136,33 +102,8 @@
         </div>
       </section>
 
-      <!-- Blog Section -->
-      <!-- <section class="section sec4" id="blogs">
-        <div class="main-title">
-          <h2>
-            My <span>Projects</span> <span class="bg-text">my state</span>
-          </h2>
-        </div>
-
-        <div class="blogs-content">
-          <div class="blogs" >
-            <div class="blog">
-              <img src="img/hero.png" alt="" />
-              <div class="blog-text">
-                <h4>how to create your own website</h4>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Mollitia, veritatis?
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> -->
-
-      <!-- Contect Section -->
-      <section class="section sec5" id="contact">
-        <div class="main-title">
+      <section class="section" id="contact">
+        <div class="main-title stat-title">
           <h2>Contact <span>ME</span> <span class="bg-text">Contact Me</span></h2>
         </div>
 
@@ -175,34 +116,18 @@
             </p>
 
             <div class="contact-info">
-
               <div class="contact-item">
-                <div class="icon">
-                  <i class="fa-solid fa-envelope"></i>
-                </div>
-                <p>
-                  <span id="socialsEmail">Email</span>
-                </p>
+                <div class="icon"><i class="fa-solid fa-envelope"></i></div>
+                <p><span id="socialsEmail">Email</span></p>
               </div>
-
               <div class="contact-item">
-                <div class="icon">
-                  <i class="fas fa-phone"></i>
-                </div>
-                <p>
-                  <span id="socialsPhone">Phone</span>
-                </p>
+                <div class="icon"><i class="fas fa-phone"></i></div>
+                <p><span id="socialsPhone">Phone</span></p>
               </div>
-
               <div class="contact-item">
-                <div class="icon">
-                  <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <p>
-                  <span id="socialsLocation">Location</span>
-                </p>
+                <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                <p><span id="socialsLocation">Location</span></p>
               </div>
-             
             </div>
 
             <div class="contact-icons">
@@ -221,32 +146,12 @@
           <div class="right-contact">
             <div class="contact-form">
               <div class="input-control">
-                <input
-                  type="text"
-                  id="input-name"
-                  placeholder="Your Name"
-                  required
-                />
-                <input
-                  type="email"
-                  id="input-email"
-                  placeholder="Your Email"
-                  required
-                />
-                <textarea
-                  name=""
-                  id="input-message"
-                  cols="15"
-                  rows="8"
-                  placeholder="message"
-                ></textarea>
+                <input type="text" id="input-name" placeholder="Your Name" required />
+                <input type="email" id="input-email" placeholder="Your Email" required />
+                <textarea name="" id="input-message" cols="15" rows="8" placeholder="message"></textarea>
               </div>
               <div class="submit-btn">
-                <a
-                  href="#"
-                  onclick="sendMail(event); return false;"
-                  class="main-btn"
-                >
+                <a href="#" onclick="sendMail(event); return false;" class="main-btn">
                   <span class="btn-text">Submit</span>
                 </a>
               </div>
@@ -254,47 +159,24 @@
           </div>
         </div>
       </section>
+
     </main>
 
-    <!-- Controles Btn -->
-    <div class="controls">
-      <div class="control control-1 active-btn" data-id="home" title="Home">
-        <i class="fa-solid fa-home"></i>
-      </div>
-      <div class="control control-2" data-id="about" title="About">
-        <i class="fa-solid fa-user"></i>
-      </div>
-      <div class="control control-3" data-id="portfolio" title="Projects">
-        <i class="fa-solid fa-folder-open"></i>
-      </div>
-      <!-- <div class="control control-4" data-id="blogs" title="Blogs">
-        <i class="fa-solid fa-newspaper"></i>
-      </div> -->
-      <div class="control control-5" data-id="contact" title="Contact">
-        <i class="fa-solid fa-comments"></i>
-      </div>
-    </div>
-
-    <!-- Theam Btn -->
-    <div class="theam-btn" title="Ligth">    
-    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Ankit Gupta. All Rights Reserved.</p>
+        </div>
+    </footer>
   </body>
-
-  <!--Script for Email -->
-  <script
-    type="text/javascript"
-    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
-  ></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript">
     (function () {
       emailjs.init({
-        publicKey: "maV1vENrx7e_Q8gkS",
+        publicKey: "maV1vENrx7e_Q8gkS", // Ensure this is your correct public key
       });
     })();
   </script>
 
   <script src="app.js"></script>
-
-  <!-- script for content -->
   <script src="data.js"></script>
 </html>

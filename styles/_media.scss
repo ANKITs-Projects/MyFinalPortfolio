@@ -1,168 +1,75 @@
-
-
-@media screen and (max-width: 740px){
-    header{
-        padding: 0;
-    }
-    header .right-header{
-        padding: 2rem !important;
-    }
-    .header-content{
-        grid-template-columns: 1fr;
-        padding-bottom: 6rem;
-    }
-    .right-header{
-        grid-row: 1;
-        width: 90%;
-        margin: 0 auto;
-        .name{
-            font-size: 2.5rem !important;
-        }
-    }
-    .header-content .left-header .image{
-        margin: auto;
-        width: 90%;
-    }
-
-    .about-stats{
-        .progress-bars{
-        grid-template-columns: 1fr;
-    }
-
-    }
-    .timeline{
-        grid-template-columns: 1fr;
-        padding-bottom: 6rem;
-    }
-
-    .about-container{
-        grid-template-columns: 1fr;
-        .right-about{
-            grid-template-columns: 1fr;
-            padding-top: 2.5rem;
-        }
-        .left-about{
-            padding-right: 0%;
-            p{
-                padding-left: 0;
-            }
-        }
-    }
-
-    .section{
-        padding: 1rem 2rem ;
-    }
-    .sec1{
-        padding: 0 0;
-    }
-    .sec2{
-        padding-bottom: 7rem;
-    }
-    .theam-btn{
-        width: 50px;
-        height: 50px;
-    }
-
-    .portfolios{
-        grid-template-columns: 1fr;
-        padding-bottom: 6rem;
-    }
-
-
-    .blogs-content{.blogs{
-        grid-template-columns: 1fr;
-        padding-bottom: 6rem;
-    }}
-
-    .contact-content-con{
-        flex-direction: column;
-        margin-bottom: 6rem;
-        .right-contact{
-            margin-left: 0;
-            margin-top: 2.5rem;
-        }
-    }
-    
-    .main-title{
-        h2{
-            font-size: 2rem;
-            span{
-                font-size: 2.5rem;
-            }
-            .bg-text{
-                font-size: 2.5rem;
-            }
-        }
-    }
-    .controls{
-        top: auto;
-        bottom: 0;
-        flex-direction: row;
-        justify-content: center;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        background-color: var(--color-gray-5);
-        .active-btn {
-    transform: translateY(-10px);
+/* --- MEDIA QUERIES --- */
+@media screen and (max-width: 1070px) {
+  .about-container {
+    grid-template-columns: 1fr;
   }
-        .control{
-            margin: 1rem .3rem;
-        }
-    }
+  .portfolios {
+    grid-template-columns: 1fr 1fr;
+  }
+  .navbar {
+    padding: 0 2rem;
+  }
 }
 
+@media screen and (max-width: 768px) {
+  section {
+    padding: 2rem 1rem;
+    padding-top: 5rem;
+  }
 
-@media screen and (max-width:1140px){
-    .contact-content-con{
-        flex-direction: column;
-        margin-bottom: 6rem;
-        .right-contact{
-            margin-left: 0;
-            margin-top: 2.5rem;
-        }
-    }
-   
-}
+  .header-content {
+    grid-template-columns: 1fr;
 
-@media screen and (max-width:1070px){
-    .about-container{
-        grid-template-columns: 1fr;
-        .right-about{
-            padding-top: 2.5rem;
-        }
-    }
-    .portfolios{
-        grid-template-columns: 1fr 1fr;
-    }
-    .blogs-content .blogs{
-        grid-template-columns: 1fr 1fr;
+    .left-header .image {
+      margin: .5rem auto;
+      width: 250px;
+      height: 250px;
     }
 
-    .main-title{
-        h2{
-            font-size: 4rem;
-            span{
-                font-size: 4rem;
-            }
-            .bg-text{
-                font-size: 4rem;
-            }
-        }
-    }
-}
+    .right-header {
+      padding-right: 0;
+      text-align: center;
+      padding-top: 0rem;
 
-@media (max-width: 768px) {
-  .main-title {
-    margin-top: 1.8rem;
-    h2 {
-      &::after {
-        width: 48px;
-        bottom: -0.9rem;
-      }
-      .bg-text {
-        font-size: clamp(2.8rem, 18vw, 4.5rem);
+      .btn-con {
+        align-self: center;
       }
     }
+  }
+
+  .navbar .nav-links {
+    display: none;
+  }
+  .portfolios {
+    grid-template-columns: 1fr;
+  }
+  .timeline {
+    grid-template-columns: 1fr;
+    margin-left: 1.5rem;
+  }
+
+  .contact-content-con {
+    flex-direction: column;
+
+    .right-contact {
+      margin-left: 0;
+      margin-top: 2rem;
+    }
+  }
+
+  .main-title h2 {
+    font-size: 2.5rem;
+
+    span {
+      font-size: 2.5rem;
+    }
+
+    .bg-text {
+      font-size: 3.5rem;
+    }
+  }
+
+  .footer {
+    padding: 2rem 1rem;
   }
 }

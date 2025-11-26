@@ -10,8 +10,13 @@ fetch(configUrl)
     document.getElementById("role").innerText = data.role;
     document.getElementById("landingPageLine").innerText = data.landingPageLine;
     document.getElementById("profileImage").src = data.profileImage;
-    // document.getElementById("iconTag").href = data.profileImage;
-    document.querySelectorAll(".resume").forEach((e) => (e.href = data.resume));
+
+    // Resume Logic: Open in new tab AND download with specific name
+    document.querySelectorAll(".resume").forEach((e) => {
+        e.href = data.resume;
+        e.target = "_blank";
+        e.setAttribute("download", "Ankit-Gupta-Resume.pdf"); 
+    });
 
     // for about section
     document.getElementById("about-content").innerText = data.aboutContent;
@@ -32,45 +37,38 @@ fetch(configUrl)
       educationModule.appendChild(div);
     });
 
-    // skills cart
+    // Skills cart (Consolidated Stack and Tools)
     const techStack = document.getElementById("techStack");
     data.techStack.forEach((e) => {
       let div = document.createElement("div");
       div.className = "skill-cart";
+      // Added quotes around src attribute to fix broken images
       div.innerHTML = `<div class="image">
-              <img src=${e.linke} alt=${e.title}>
+              <img src="${e.linke}" alt="${e.title}"> 
             </div>
             <h5>${e.title}</h5>`;
       techStack.appendChild(div);
     });
 
-    const techTools = document.getElementById("techTools");
-    data.techStack.forEach((e) => {
-      let div = document.createElement("div");
-      div.className = "skill-cart";
-      div.innerHTML = `<div class="image">
-              <img src=${e.linke} alt=${e.title}>
-            </div>
-            <h5>${e.title}</h5>`;
-      techTools.appendChild(div);
-    });
+    // REMOVED duplicate TechTools loop here
 
     // For Project section
     const projects = document.getElementById("projects");
     data.projects.forEach((e) => {
       const div = document.createElement("div");
       div.className = "portfolio-item";
+      // Added quotes around src, href attributes. This fixes broken links.
       div.innerHTML = `<div class="portfolio-img">
               <div class="image">
-                <img src=${e.image} alt=${e.title} />
+                <img src="${e.image}" alt="${e.title}" />
               </div>
               <div class="hover-item">
                 <h3>Project Source</h3>
                 <div class="icons">
-                  <a href=${e.github} target="_blank" class="icon">
+                  <a href="${e.github}" target="_blank" class="icon">
                     <i class="fab fa-github"></i>
                   </a>
-                  <a href=${e.link} target="_blank" class="icon">
+                  <a href="${e.link}" target="_blank" class="icon">
                     <i class="fa-solid fa-link"></i>
                   </a>
                 </div>
