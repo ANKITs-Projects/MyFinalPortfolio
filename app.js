@@ -58,30 +58,79 @@ window.addEventListener('scroll', highlightMenu);
 window.addEventListener('load', highlightMenu); // Ensures Home is green immediately on refresh
 highlightMenu(); // Run once on script load
 
+// Email Validation
+const validateEmail = (email) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+};
+
 // Email Function
 function sendMail(e) {
-    if (e && typeof e.preventDefault === "function") e.preventDefault();
+  if (e && typeof e.preventDefault === "function") e.preventDefault();
 
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    const senderName = document.getElementById('input-name').value;
-    let params = {
-        name: senderName,
-        email: document.getElementById("input-email").value,
-        message: document.getElementById("input-message").value,
-        time: `${hours}:${minutes}:${seconds}`
-    };
+  const nameInput = document.getElementById('input-name');
+  const emailInput = document.getElementById("input-email");
+  const messageInput = document.getElementById("input-message");
 
-    emailjs.send("service_yd52p3d", "template_wxfn3em", params)
-        .then((response) => {
-            console.log("EmailJS success:", response);
-            alert("Email sent successfully");
-        })
-        .catch((error) => {
-            console.error("EmailJS error:", error);
-            alert("Failed to send email — check console for details.");
-        });
+  const senderName = nameInput.value.trim(); // .trim() removes accidental spaces
+  const senderEmail = emailInput.value.trim();
+  const senderMessage = messageInput.value.trim();
+
+  // 1. Check Name (Fixed the missing parentheses)
+  if (!senderName) {
+    alert("Please enter your name.");
+    nameInput.focus(); // ADDED () HERE
+    return;
+  }
+
+  // 2. Check Email exists
+  if (!senderEmail) {
+    alert("Please enter your email.");
+    emailInput.focus();
+    return;
+  }
+
+  // 3. Check Regex Validity
+  if (!validateEmail(senderEmail)) {
+    alert("Please enter a valid email address.");
+    emailInput.focus();
+    return;
+  }
+
+  // 4. Check Message
+  if (!senderMessage) {
+    alert("Please enter a message.");
+    messageInput.focus();
+    return;
+  }
+
+  // Prepare Data
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+  let params = {
+    name: senderName,
+    email: senderEmail,
+    message: senderMessage,
+    time: `${hours}:${minutes}:${seconds}`
+  };
+
+  // Send
+  emailjs.send("service_yd52p3d", "template_wxfn3em", params)
+    .then((response) => {
+      console.log("EmailJS success:", response);
+      alert("Email sent successfully");
+      
+      // Optional: Clear form after success
+      nameInput.value = "";
+      emailInput.value = "";
+      messageInput.value = "";
+    })
+    .catch((error) => {
+      console.error("EmailJS error:", error);
+      alert("Failed to send email — check console for details.");
+    });
 }
 
