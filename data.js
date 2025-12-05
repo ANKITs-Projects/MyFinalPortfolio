@@ -11,94 +11,36 @@ fetch(configUrl)
     document.getElementById("landingPageLine").innerText = data.landingPageLine;
     document.getElementById("profileImage").src = data.profileImage;
 
-    // Resume Logic: Open in new tab AND download with specific name
-    // document.querySelectorAll(".resume").forEach((e) => {
-    //     e.href = data.resume;
-    //     e.target = "_blank";
-    //     e.setAttribute("download", "Ankit-Gupta-Resume.pdf"); 
-    // });
-
-    // ... existing code ...
-// --- NEW ROBUST RESUME LOGIC ---
-    // document.querySelectorAll(".resume").forEach((btn) => {
-    //   btn.setAttribute("href", data.resume);
-      
-    //   btn.addEventListener("click", (e) => {
-    //     e.preventDefault(); 
-        
-    //     // 1. CONVERT LINK FOR VIEWING
-    //     // GitHub Raw links force download. We convert to jsDelivr to view it.
-    //     let viewUrl = data.resume;
-    //     if (viewUrl.includes("raw.githubusercontent.com")) {
-    //         // Regex to convert: raw.githubusercontent.com/User/Repo/Branch/Path 
-    //         // to: cdn.jsdelivr.net/gh/User/Repo@Branch/Path
-    //         viewUrl = viewUrl.replace(
-    //             /raw\.githubusercontent\.com\/([^\/]+)\/([^\/]+)\/([^\/]+)\/(.+)/, 
-    //             "cdn.jsdelivr.net/gh/$1/$2@$3/$4"
-    //         );
-    //     }
-
-    //     // 2. OPEN IN NEW TAB (View)
-    //     // Opening immediately prevents popup blockers
-    //     window.open(viewUrl, '_blank');
-
-    //     // 3. DOWNLOAD IN BACKGROUND
-    //     fetch(data.resume)
-    //       .then(response => response.blob())
-    //       .then(blob => {
-    //         // Create a blob URL to force the name "Ankit-Gupta-Resume.pdf"
-    //         const url = window.URL.createObjectURL(blob);
-    //         const link = document.createElement('a');
-    //         link.href = url;
-    //         link.download = "Ankit-Gupta-Resume.pdf"; 
-    //         document.body.appendChild(link);
-    //         link.click();
-            
-    //         // Cleanup
-    //         setTimeout(() => {
-    //             document.body.removeChild(link);
-    //             window.URL.revokeObjectURL(url);
-    //         }, 100);
-    //       })
-    //       .catch(err => console.error("Download failed:", err));
-    //   });
-    // });
-
-    // // ... (rest of the code for about section) ...
-
-
-    // --- RESUME LOGIC (SPLIT BUTTON) ---
-    
-    // 1. SETUP THE LINK (View Logic)
-    document.querySelectorAll(".resume-view").forEach((btn) => {
-        let viewUrl = data.resume;
-        
-        // Convert Github Raw to jsDelivr for viewing
-        if (viewUrl.includes("raw.githubusercontent.com")) {
-            viewUrl = viewUrl.replace(
-                /raw\.githubusercontent\.com\/([^\/]+)\/([^\/]+)\/([^\/]+)\/(.+)/, 
-                "cdn.jsdelivr.net/gh/$1/$2@$3/$4"
-            );
-        }
-        
-        btn.setAttribute("href", viewUrl);
-        btn.setAttribute("target", "_blank"); // Open in new tab
-    });
-
-    // 2. SETUP THE DOWNLOAD (Download Logic)
+    // --- MERGED RESUME LOGIC ---
+    // Targets both buttons (or just one if you simplify your HTML)
     document.querySelectorAll(".resume-download").forEach((btn) => {
-        btn.setAttribute("href", "#"); // Prevent default navigation
+        // Set href so right-click "Save link as" still works natively
+        btn.setAttribute("href", data.resume);
         
         btn.addEventListener("click", (e) => {
             e.preventDefault();
             
-            // Visual feedback (optional)
-            const originalIcon = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // Loading spinner
+            // --- ACTION 1: OPEN IN NEW TAB (Immediate) ---
+            // We do this first to prevent popup blockers from stopping the tab
+            let viewUrl = data.resume;
+            
+            // Convert Github Raw to jsDelivr for proper viewing in browser
+            if (viewUrl.includes("raw.githubusercontent.com")) {
+                viewUrl = viewUrl.replace(
+                    /raw\.githubusercontent\.com\/([^\/]+)\/([^\/]+)\/([^\/]+)\/(.+)/, 
+                    "cdn.jsdelivr.net/gh/$1/$2@$3/$4"
+                );
+            }
+            window.open(viewUrl, '_blank');
 
+            // --- ACTION 2: DOWNLOAD IN BACKGROUND ---
+            // Optional: Loading state (store original content)
+            const originalContent = btn.innerHTML;
+            
             fetch(data.resume)
               .then(response => response.blob())
               .then(blob => {
+                // Create a temporary link to force the specific filename
                 const url = window.URL.createObjectURL(blob);
                 const link = document.createElement('a');
                 link.href = url;
@@ -110,20 +52,14 @@ fetch(configUrl)
                 setTimeout(() => {
                     document.body.removeChild(link);
                     window.URL.revokeObjectURL(url);
-                    btn.innerHTML = originalIcon; // Restore icon
                 }, 100);
               })
               .catch(err => {
-                  console.error("Download failed:", err);
-                  btn.innerHTML = originalIcon;
-                  alert("Download failed. Opening in new tab instead.");
-                  window.open(data.resume, '_blank');
+                  console.error("Background download failed:", err);
+                  // No need to alert aggressively since the tab opened successfully above
               });
         });
     });
-
-    
-    document.getElementById("profileImage").src = data.profileImage;
 
     // for about section
     document.getElementById("about-content").innerText = data.aboutContent;
