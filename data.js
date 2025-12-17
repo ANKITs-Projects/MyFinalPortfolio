@@ -14,51 +14,51 @@ fetch(configUrl)
     // --- MERGED RESUME LOGIC ---
     // Targets both buttons (or just one if you simplify your HTML)
     document.querySelectorAll(".resume-download").forEach((btn) => {
-        // Set href so right-click "Save link as" still works natively
-        btn.setAttribute("href", data.resume);
-        
-        btn.addEventListener("click", (e) => {
-            e.preventDefault();
-            
-            // --- ACTION 1: OPEN IN NEW TAB (Immediate) ---
-            // We do this first to prevent popup blockers from stopping the tab
-            let viewUrl = data.resume;
-            
-            // Convert Github Raw to jsDelivr for proper viewing in browser
-            if (viewUrl.includes("raw.githubusercontent.com")) {
-                viewUrl = viewUrl.replace(
-                    /raw\.githubusercontent\.com\/([^\/]+)\/([^\/]+)\/([^\/]+)\/(.+)/, 
-                    "cdn.jsdelivr.net/gh/$1/$2@$3/$4"
-                );
-            }
-            window.open(viewUrl, '_blank');
+      // Set href so right-click "Save link as" still works natively
+      btn.setAttribute("href", data.resume);
 
-            // --- ACTION 2: DOWNLOAD IN BACKGROUND ---
-            // Optional: Loading state (store original content)
-            const originalContent = btn.innerHTML;
-            
-            fetch(data.resume)
-              .then(response => response.blob())
-              .then(blob => {
-                // Create a temporary link to force the specific filename
-                const url = window.URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = "Ankit-Gupta-Resume.pdf"; 
-                document.body.appendChild(link);
-                link.click();
-                
-                // Cleanup
-                setTimeout(() => {
-                    document.body.removeChild(link);
-                    window.URL.revokeObjectURL(url);
-                }, 100);
-              })
-              .catch(err => {
-                  console.error("Background download failed:", err);
-                  // No need to alert aggressively since the tab opened successfully above
-              });
-        });
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        // --- ACTION 1: OPEN IN NEW TAB (Immediate) ---
+        // We do this first to prevent popup blockers from stopping the tab
+        let viewUrl = data.resume;
+
+        // Convert Github Raw to jsDelivr for proper viewing in browser
+        if (viewUrl.includes("raw.githubusercontent.com")) {
+          viewUrl = viewUrl.replace(
+            /raw\.githubusercontent\.com\/([^\/]+)\/([^\/]+)\/([^\/]+)\/(.+)/,
+            "cdn.jsdelivr.net/gh/$1/$2@$3/$4"
+          );
+        }
+        window.open(viewUrl, "_blank");
+
+        // --- ACTION 2: DOWNLOAD IN BACKGROUND ---
+        // Optional: Loading state (store original content)
+        const originalContent = btn.innerHTML;
+
+        fetch(data.resume)
+          .then((response) => response.blob())
+          .then((blob) => {
+            // Create a temporary link to force the specific filename
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "Ankit-Gupta-Resume.pdf";
+            document.body.appendChild(link);
+            link.click();
+
+            // Cleanup
+            setTimeout(() => {
+              document.body.removeChild(link);
+              window.URL.revokeObjectURL(url);
+            }, 100);
+          })
+          .catch((err) => {
+            console.error("Background download failed:", err);
+            // No need to alert aggressively since the tab opened successfully above
+          });
+      });
     });
 
     // for about section
@@ -120,19 +120,21 @@ fetch(configUrl)
             <div class="portfolio-text">
               <h4>${e.title}</h4>
               <p class="tech-stack">Tech-Stack :- ${e.tech.join(", ")}</p>
-              <p>
-                ${e.description}
-              </p>
+              <p style="white-space: pre-line;">
+  ${e.description}
+</p>
+
             </div>`;
-      projects.appendChild(div)
+      projects.appendChild(div);
     });
 
     // Contact info
-    document.getElementById("socialsEmail").innerText = data.socials.email
-    document.getElementById("socialsPhone").innerText = data.socials.phone
-    document.getElementById("socialsLocation").innerText = data.socials.location
-    document.getElementById("socialsTwitter").href = data.socials.twitter
-    document.getElementById("socialsLinkedin").href = data.socials.linkedin
-    document.getElementById("socialsGithub").href = data.socials.github
+    document.getElementById("socialsEmail").innerText = data.socials.email;
+    document.getElementById("socialsPhone").innerText = data.socials.phone;
+    document.getElementById("socialsLocation").innerText =
+      data.socials.location;
+    document.getElementById("socialsTwitter").href = data.socials.twitter;
+    document.getElementById("socialsLinkedin").href = data.socials.linkedin;
+    document.getElementById("socialsGithub").href = data.socials.github;
   })
   .catch((err) => console.error("Error loading data:", err));
