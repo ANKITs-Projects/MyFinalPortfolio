@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -53,10 +53,10 @@
 
           <div class="btn-con">
             <div class="main-btn resume-container">
-                <a href="#" class="resume-download">
-                    <span class="btn-text">Resume</span>
-                </a>
-              </div>
+              <a href="#" class="resume-download">
+                <span class="btn-text">Resume</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -73,21 +73,19 @@
             <h4>Information About Me</h4>
             <p id="about-content"></p>
             <div class="btn-con">
-            <div class="main-btn resume-container">
+              <div class="main-btn resume-container">
                 <a href="#" class="resume-download">
-                    <span class="btn-text">Resume</span>
+                  <span class="btn-text">Resume</span>
                 </a>
               </div>
-          </div>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="section" id="education_section">
         <div class="main-title stat-title">
-          <h2>
-            Educa<span>tion</span> <span class="bg-text">Education</span>
-          </h2>
+          <h2>Educa<span>tion</span> <span class="bg-text">Education</span></h2>
         </div>
 
         <div class="timeline" id="education"></div>
@@ -95,15 +93,102 @@
 
       <section class="section" id="skills_section">
         <div class="main-title stat-title">
-          <h2>
-            My<span>Skills</span> <span class="bg-text">My Skills</span>
-          </h2>
+          <h2>My<span>Skills</span> <span class="bg-text">My Skills</span></h2>
         </div>
+        <div class="contact-content-con">
+          <div class="left-contact" style="flex: 0 0 60%; padding-right: 3%">
+            <div class="skillsCart" id="skills">
+              <div>
+                <h3>Tech Stack & Tools</h3>
+                <div class="about-skills" id="techStack"></div>
+              </div>
+            </div>
+          </div>
 
-        <div class="skillsCart" id="skills">
-          <div>
-            <h3>Tech Stack & Tools</h3>
-            <div class="about-skills" id="techStack"></div>
+          <div
+            class="right-contact"
+            style="
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              align-items: flex-start;
+              flex: 0 0 40%;
+              gap: 100px;
+            "
+          >
+           
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: end;
+                width: 100%;
+              "
+            >
+              <div
+                class="skillsCart"
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  width: 100%;
+                "
+              >
+                <h3>LeetCode Status</h3>
+              </div>
+              <div class="hover-class">
+                  <img
+                src="https://leetcard.jacoblin.cool/ankit_gupta6"
+                alt="LeetCode Stats - Ankit Gupta"
+              />
+              </div>
+              
+            </div>
+             <div
+              style="
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: end;
+                width: 100%;
+              "
+            >
+              <div
+                class="skillsCart"
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  width: 100%;
+                "
+              >
+                <h3>GitHub Status</h3>
+              </div>
+              <div
+                class="hover-class"
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  width: 100%;
+                "
+              >
+                <img
+                  src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=ANKITs-Projects&theme=github_dark"
+                  alt="GitHub Summary"
+                  style="
+                    transform: scale(1.2);
+                    max-width: 420px;
+                    width: 100%;
+                    height: auto;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                  "
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -190,13 +275,16 @@
               <div class="submit-btn">
                 <a
                   href="#"
-                  onclick="sendMail(event); return false;"
+                  onclick="
+                    sendMail(event);
+                    return false;
+                  "
                   class="main-btn"
                 >
                   <span class="btn-text">Submit</span>
                 </a>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </section>

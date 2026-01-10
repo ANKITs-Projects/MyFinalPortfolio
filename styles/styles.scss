@@ -856,4 +856,19 @@ header.section {
   }
 }
 
+
+.hover-class {
+  max-width: 520px;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transform: translateY(-5px);
+  }
+}
+
+
 @import "./media";
