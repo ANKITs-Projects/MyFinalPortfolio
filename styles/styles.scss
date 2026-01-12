@@ -59,6 +59,7 @@ html {
     color: #000;
   }
 
+  
   /* Light Mode Specific Adjustment for Title */
   .main-title {
     h2,
@@ -424,43 +425,44 @@ header.section {
 }
 
 .portfolios {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
   margin-top: 3rem;
 
   .portfolio-item {
     display: flex;
-    flex-direction: column;
+    align-items: stretch; // ✅ IMPORTANT
     background-color: var(--color-gray-5);
     border-radius: 15px;
+    overflow: hidden;
     box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s ease-in-out;
+    transition: transform 0.4s ease-in-out;
 
     &:hover {
       transform: translateY(-5px);
 
-      .portfolio-img .hover-item {
-        opacity: 1;
-        transform: scale(1);
-      }
+      // .portfolio-img .hover-item {
+      //   opacity: 1;
+      //   transform: scale(1);
+      // }
     }
 
     .portfolio-img {
       position: relative;
+      width: 35%;
       overflow: hidden;
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
 
       .image {
         width: 100%;
-        height: 220px;
+        height: 100%; // ✅ MATCH TEXT HEIGHT
 
         img {
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: cover; // ✅ CORRECT
           display: block;
+          transition: transform 0.4s ease;
         }
       }
 
@@ -517,24 +519,29 @@ header.section {
           }
         }
       }
+
+      &:hover {
+        .hover-item {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
     }
 
     .portfolio-text {
-      margin-top: -7px;
-      padding: 1.1rem;
-      border-top: 8px solid var(--color-secondary);
+      width: 75%;
+      padding: 1rem;
       text-align: start;
-
       .tech-stack {
         font-size: 0.9rem;
         color: var(--color-secondary);
-        line-height: 1.4;
-        margin-bottom: 0.5rem;
+        line-height: 0.5;
+        margin-bottom: 0.2rem;
       }
 
       h4 {
         font-size: 1.5rem;
-        margin-bottom: 0.7rem;
+        margin-bottom: 0.5rem;
         cursor: pointer;
         transition: color 0.4s ease-in-out;
 
@@ -544,11 +551,21 @@ header.section {
       }
 
       p {
+        text-align: justify;
+        font-size: 1rem;
         color: var(--color-gray-2);
-        line-height: 2rem;
-        padding-bottom: 1rem;
+        line-height: 1.2rem;
+        padding-bottom: 0rem;
       }
     }
+    
+
+      .left-border{
+         border-left: 8px solid var(--color-secondary);
+      }
+      .right-border{
+         border-right: 8px solid var(--color-secondary);
+      }
   }
 }
 
@@ -695,8 +712,6 @@ header.section {
   display: flex;
   align-self: flex-start;
 }
-
-
 
 .main-btn {
   border-radius: 30px;
@@ -856,7 +871,6 @@ header.section {
   }
 }
 
-
 .hover-class {
   max-width: 520px;
   width: 100%;
@@ -865,10 +879,9 @@ header.section {
 
   &:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
-      transform: translateY(-5px);
+    cursor: pointer;
+    transform: translateY(-5px);
   }
 }
-
 
 @import "./media";

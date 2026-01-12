@@ -9,7 +9,7 @@ function updateThemeIcon() {
         theambtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
     } else {
         theambtn.title = "Light";
-        theambtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        theambtn.innerHTML = '<i class="fa-solid fa-sun" style="color: #FFD700;"></i>';
     }
 }
 

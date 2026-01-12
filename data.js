@@ -97,34 +97,72 @@ fetch(configUrl)
 
     // For Project section
     const projects = document.getElementById("projects");
-    data.projects.forEach((e) => {
+    data.projects.forEach((e, i) => {
       const div = document.createElement("div");
       div.className = "portfolio-item";
       // Added quotes around src, href attributes. This fixes broken links.
-      div.innerHTML = `<div class="portfolio-img">
-              <div class="image">
-                <img src="${e.image}" alt="${e.title}" />
-              </div>
-              <div class="hover-item">
-                <h3>Project Source</h3>
-                <div class="icons">
-                  <a href="${e.github}" target="_blank" class="icon">
-                    <i class="fab fa-github"></i>
-                  </a>
-                  <a href="${e.link}" target="_blank" class="icon">
-                    <i class="fa-solid fa-link"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="portfolio-text">
-              <h4>${e.title}</h4>
-              <p class="tech-stack">Tech-Stack :- ${e.tech.join(", ")}</p>
-              <p style="white-space: pre-line;">
-  ${e.description}
-</p>
+      if (i % 2 == 0) {
+        div.innerHTML = `<div class="portfolio-img">
+                          <div class="image">
+                            <img src="${e.image}" alt="${e.title}" />
+                          </div>
+                          <div class="hover-item">
+                            <h3>${e.title}</h3>
+                            <div class="icons">
+                              <a href="${
+                                e.github
+                              }" target="_blank" class="icon">
+                                <i class="fab fa-github"></i>
+                              </a>
+                              <a href="${e.link}" target="_blank" class="icon">
+                                <i class="fa-solid fa-link"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="portfolio-text left-border">
+                          <a href="${e.link}" target="_blank">
+                            <h4>${e.title}</h4>
+                          </a>
+                          <p class="tech-stack">Tech-Stack :- ${e.tech.join(
+                            ", "
+                          )}</p>
+                          <p style="white-space: pre-line;">
+                            ${e.description}
+                          </p>
+                        </div>`;
+      } else {
+        div.innerHTML = `<div class="portfolio-text right-border">
+                          <a href="${e.link}" target="_blank">
+                            <h4>${e.title}</h4>
+                          </a>
+                          <p class="tech-stack">Tech-Stack :- ${e.tech.join(
+                            ", "
+                          )}</p>
+                          <p style="white-space: pre-line;">
+                            ${e.description}
+                          </p>
+                        </div>
+                        <div class="portfolio-img">
+                          <div class="image">
+                            <img src="${e.image}" alt="${e.title}" />
+                          </div>
+                          <div class="hover-item">
+                            <h3>${e.title}</h3>
+                            <div class="icons">
+                              <a href="${
+                                e.github
+                              }" target="_blank" class="icon">
+                                <i class="fab fa-github"></i>
+                              </a>
+                              <a href="${e.link}" target="_blank" class="icon">
+                                <i class="fa-solid fa-link"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>`;
+      }
 
-            </div>`;
       projects.appendChild(div);
     });
 
