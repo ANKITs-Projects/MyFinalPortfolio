@@ -1,5 +1,6 @@
 /* --- MEDIA QUERIES --- */
 @media screen and (max-width: 1070px) {
+  :root { --mobile-style: none; }
   .about-container {
     grid-template-columns: 1fr;
   }
@@ -12,9 +13,11 @@
 }
 
 @media screen and (max-width: 768px) {
+  
   section {
     padding: 2rem 1rem;
-    padding-top: 5rem;
+    padding-top: 2rem;
+    
   }
 
   .header-content {
@@ -41,11 +44,32 @@
     display: none;
   }
   .portfolios {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    margin: auto;
+    .portfolio-item{
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      // margin: auto;
+      .portfolio-img {
+        width: 100%;
+      }
+
+      .portfolio-text{
+        width: 100%;
+      }
+    }
+    .left-border{
+         border-top: 8px solid var(--color-secondary);
+      }
+    .right-border{
+        border-bottom: 8px solid var(--color-secondary);
+    }
   }
   .timeline {
     grid-template-columns: 1fr;
-    margin-left: 1.5rem;
+    width: 90%;
+    margin-left: auto;
   }
 
   .contact-content-con {

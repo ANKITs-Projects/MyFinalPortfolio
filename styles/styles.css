@@ -20,6 +20,7 @@
   --br-sm-2: 14px;
   --box-shadow-1: 0 3px 15px rgba(0, 0, 0, 0.3);
   --nav-height: 70px;
+  --mobile-style: flex;
 }
 
 /* Enable smooth scrolling */
@@ -155,6 +156,7 @@ section {
   position: relative;
   padding: 0 10rem;
   padding-top: 5rem;
+  align-self: center;
 }
 
 header.section {
@@ -244,10 +246,11 @@ header.section {
 .about-container {
   padding-top: 3.5rem;
   padding-bottom: 5rem;
+  text-align: justify;
 }
 .about-container .left-about {
-  width: 100%;
-  padding-right: 5rem;
+  width: 90%;
+  margin: auto;
 }
 .about-container .left-about p {
   margin: 1.5rem 0;
@@ -378,7 +381,7 @@ header.section {
 /* Portfolios */
 .portfolio-text {
   padding: 2rem 0;
-  text-align: center;
+  text-align: start;
 }
 
 .portfolios {
@@ -475,7 +478,7 @@ header.section {
 .portfolios .portfolio-item .portfolio-text .tech-stack {
   font-size: 0.9rem;
   color: var(--color-secondary);
-  line-height: 0.5;
+  line-height: normal;
   margin-bottom: 0.2rem;
 }
 .portfolios .portfolio-item .portfolio-text h4 {
@@ -785,6 +788,9 @@ header.section {
 
 /* --- MEDIA QUERIES --- */
 @media screen and (max-width: 1070px) {
+  :root {
+    --mobile-style: none;
+  }
   .about-container {
     grid-template-columns: 1fr;
   }
@@ -798,7 +804,7 @@ header.section {
 @media screen and (max-width: 768px) {
   section {
     padding: 2rem 1rem;
-    padding-top: 5rem;
+    padding-top: 2rem;
   }
   .header-content {
     grid-template-columns: 1fr;
@@ -820,11 +826,30 @@ header.section {
     display: none;
   }
   .portfolios {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    margin: auto;
+  }
+  .portfolios .portfolio-item {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .portfolios .portfolio-item .portfolio-img {
+    width: 100%;
+  }
+  .portfolios .portfolio-item .portfolio-text {
+    width: 100%;
+  }
+  .portfolios .left-border {
+    border-top: 8px solid var(--color-secondary);
+  }
+  .portfolios .right-border {
+    border-bottom: 8px solid var(--color-secondary);
   }
   .timeline {
     grid-template-columns: 1fr;
-    margin-left: 1.5rem;
+    width: 90%;
+    margin-left: auto;
   }
   .contact-content-con {
     flex-direction: column;

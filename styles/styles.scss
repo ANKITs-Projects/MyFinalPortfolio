@@ -20,6 +20,7 @@
   --br-sm-2: 14px;
   --box-shadow-1: 0 3px 15px rgba(0, 0, 0, 0.3);
   --nav-height: 70px;
+  --mobile-style: flex;
 }
 
 /* Enable smooth scrolling */
@@ -172,6 +173,7 @@ section {
   position: relative;
   padding: 0 10rem;
   padding-top: 5rem;
+  align-self: center;
 }
 
 header.section {
@@ -271,11 +273,10 @@ header.section {
 .about-container {
   padding-top: 3.5rem;
   padding-bottom: 5rem;
-
+  text-align: justify;
   .left-about {
-    width: 100%;
-    padding-right: 5rem;
-
+    width: 90%;
+    margin: auto;
     p {
       margin: 1.5rem 0;
       line-height: 2rem;
@@ -421,7 +422,7 @@ header.section {
 /* Portfolios */
 .portfolio-text {
   padding: 2rem 0;
-  text-align: center;
+  text-align: start;
 }
 
 .portfolios {
@@ -535,7 +536,7 @@ header.section {
       .tech-stack {
         font-size: 0.9rem;
         color: var(--color-secondary);
-        line-height: 0.5;
+        line-height: normal;
         margin-bottom: 0.2rem;
       }
 
