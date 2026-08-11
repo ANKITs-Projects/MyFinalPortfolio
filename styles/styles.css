@@ -1095,6 +1095,208 @@ header#home {
   transform: translateY(-2px);
 }
 
+/* ===== Experience Section ===== */
+.experience-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+.exp-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+.exp-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  border-radius: 3px 0 0 3px;
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
+.exp-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 12px 36px var(--border-glow);
+  transform: translateY(-3px);
+}
+.exp-card:hover::before {
+  opacity: 1;
+}
+/* Card Header */
+.exp-card-header {
+  padding: 1.8rem 2rem 1.2rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.exp-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+.exp-role-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background-color: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.exp-company {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+.exp-company-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.exp-company-link:hover {
+  color: var(--accent-secondary);
+}
+.exp-company-link i {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+.exp-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+  margin-top: 0.4rem;
+}
+.exp-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+.exp-meta-item i {
+  color: var(--accent-primary);
+  font-size: 0.8rem;
+}
+.exp-current-badge {
+  color: #10b981;
+  font-weight: 700;
+  background-color: rgba(16, 185, 129, 0.1);
+  padding: 0.1rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  font-size: 0.72rem;
+  vertical-align: middle;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.exp-type {
+  color: var(--accent-secondary) !important;
+}
+/* Card Body */
+.exp-card-body {
+  padding: 1.6rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.exp-description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+.exp-section h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: var(--font-mono);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.exp-section h4 i {
+  color: var(--accent-primary);
+  font-size: 0.85rem;
+}
+.exp-list {
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.exp-list li {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding: 0.4rem 0.8rem;
+  border-left: 2px solid var(--border-color);
+  transition: var(--transition-smooth);
+  list-style: none;
+}
+.exp-list li:hover {
+  border-left-color: var(--accent-primary);
+  color: var(--text-primary);
+  padding-left: 1rem;
+}
+.exp-achievements li {
+  border-left-color: rgba(16, 185, 129, 0.3);
+}
+.exp-achievements li i {
+  color: #f59e0b;
+  margin-right: 0.3rem;
+  font-size: 0.75rem;
+}
+.exp-achievements li:hover {
+  border-left-color: #10b981;
+}
+.exp-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+}
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .exp-card-header {
+    padding: 1.4rem 1.4rem 1rem;
+  }
+  .exp-card-body {
+    padding: 1.2rem 1.4rem 1.5rem;
+  }
+  .exp-company {
+    font-size: 1.15rem;
+  }
+  .exp-meta {
+    gap: 0.4rem 1rem;
+  }
+}
+
 /* Footer Section */
 .footer {
   border-top: 1px solid var(--border-color);
