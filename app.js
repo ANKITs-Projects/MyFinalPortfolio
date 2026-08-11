@@ -1,64 +1,180 @@
 // Toggle theme
 const theambtn = document.querySelector(".theam-btn");
-const navLinks = document.querySelectorAll('.nav-links li a');
-const sections = document.querySelectorAll('section'); // Grabs header#home, section#about, etc.
+const navLinks = document.querySelectorAll(".nav-links li a");
+const sections = document.querySelectorAll("header, section");
 
 function updateThemeIcon() {
-    if (document.body.classList.contains('ligth-mode')) {
-        theambtn.title = "Dark";
-        theambtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
-    } else {
-        theambtn.title = "Light";
-        theambtn.innerHTML = '<i class="fa-solid fa-sun" style="color: #FFD700;"></i>';
-    }
+  if (document.body.classList.contains("ligth-mode")) {
+    theambtn.title = "Dark";
+    theambtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+  } else {
+    theambtn.title = "Light";
+    theambtn.innerHTML =
+      '<i class="fa-solid fa-sun" style="color: #FFD700;"></i>';
+  }
 }
 
-theambtn.addEventListener('click', () => {
-    document.body.classList.toggle("ligth-mode");
-    updateThemeIcon();
+theambtn.addEventListener("click", () => {
+  document.body.classList.toggle("ligth-mode");
+  updateThemeIcon();
 });
 
 // Run icon update on start
 updateThemeIcon();
 
-// --- SCROLL SPY LOGIC ---
-function highlightMenu() {
-    let current = '';
-    
-    // Explicitly check if we are at the top of the page
-    if (window.scrollY < 200) {
-        current = 'home'; 
-    } else {
-        // Otherwise, check which section we are scrolling through
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            // 200px offset triggers the change slightly before the section hits the top
-            if (window.scrollY >= (sectionTop - 200)) {
-                current = section.getAttribute('id');
-            }
-        });
-    }
-
-    // Loop through links and add/remove class
-    navLinks.forEach(link => {
-        link.classList.remove('active-link');
-        
-        // Safety check: ensure 'current' exists before checking match
-        if (current) {
-            const href = link.getAttribute('href').replace('#', '');
-            if (href === current) {
-                link.classList.add('active-link');
-            }
-        }
-    });
+// Mobile navigation menu toggle
+function toggleMobileMenu() {
+  const navLinksContainer = document.querySelector(".nav-links");
+  const hamburgerBtn = document.querySelector(".hamburger");
+  navLinksContainer.classList.toggle("mobile-active");
+  hamburgerBtn.classList.toggle("open");
 }
 
-// Event Listeners
-window.addEventListener('scroll', highlightMenu);
-window.addEventListener('load', highlightMenu); // Ensures Home is green immediately on refresh
-highlightMenu(); // Run once on script load
+document.querySelectorAll(".nav-links li a").forEach((link) => {
+  link.addEventListener("click", () => {
+    const navLinksContainer = document.querySelector(".nav-links");
+    const hamburgerBtn = document.querySelector(".hamburger");
+    if (navLinksContainer.classList.contains("mobile-active")) {
+      navLinksContainer.classList.remove("mobile-active");
+      hamburgerBtn.classList.remove("open");
+    }
+  });
+});
 
-// Email Validation
+// --- SCROLL SPY LOGIC ---
+function highlightMenu() {
+  let current = "";
+
+  if (window.scrollY < 150) {
+    current = "home";
+  } else {
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop;
+      if (window.scrollY >= sectionTop - 180) {
+        current = section.getAttribute("id");
+      }
+    });
+  }
+
+  // Map education_section back to Education navbar link if needed
+  // In index.html navbar, we have links: #home, #about, #education_section, #skills_section, #portfolio, #contact
+  navLinks.forEach((link) => {
+    link.classList.remove("active-link");
+    if (current) {
+      const href = link.getAttribute("href").replace("#", "");
+      if (href === current) {
+        link.classList.add("active-link");
+      }
+    }
+  });
+}
+
+window.addEventListener("scroll", highlightMenu);
+window.addEventListener("load", highlightMenu);
+highlightMenu();
+
+// --- SCROLL REVEAL OBSERVER ---
+const reveals = document.querySelectorAll(".reveal");
+const revealObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    root: null,
+    threshold: 0.05,
+    rootMargin: "0px 0px -50px 0px"
+  }
+);
+reveals.forEach((reveal) => revealObserver.observe(reveal));
+
+// --- HTML5 CANVAS NEURAL BACKGROUND ANIMATION ---
+const canvas = document.getElementById("neural-canvas");
+const ctx = canvas.getContext("2d");
+
+let width = (canvas.width = window.innerWidth);
+let height = (canvas.height = window.innerHeight);
+
+window.addEventListener("resize", () => {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+});
+
+const numParticles = 55;
+const particles = [];
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * width;
+    this.y = Math.random() * height;
+    this.vx = (Math.random() - 0.5) * 0.35;
+    this.vy = (Math.random() - 0.5) * 0.35;
+    this.radius = Math.random() * 2 + 1;
+  }
+
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+
+    if (this.x < 0 || this.x > width) this.vx *= -1;
+    if (this.y < 0 || this.y > height) this.vy *= -1;
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fillStyle = document.body.classList.contains("ligth-mode")
+      ? "rgba(37, 99, 235, 0.15)"
+      : "rgba(99, 102, 241, 0.25)";
+    ctx.fill();
+  }
+}
+
+for (let i = 0; i < numParticles; i++) {
+  particles.push(new Particle());
+}
+
+function animate() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
+  ctx.clearRect(0, 0, width, height);
+  const isLightMode = document.body.classList.contains("ligth-mode");
+  const lineColor = isLightMode
+    ? "rgba(37, 99, 235, 0.05)"
+    : "rgba(99, 102, 241, 0.07)";
+
+  for (let i = 0; i < particles.length; i++) {
+    const p1 = particles[i];
+    p1.update();
+    p1.draw();
+
+    for (let j = i + 1; j < particles.length; j++) {
+      const p2 = particles[j];
+      const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
+
+      if (dist < 130) {
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = lineColor;
+        ctx.lineWidth = (1 - dist / 130) * 1.2;
+        ctx.stroke();
+      }
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
+
+// Email Validation Helper
 const validateEmail = (email) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
@@ -68,36 +184,32 @@ const validateEmail = (email) => {
 function sendMail(e) {
   if (e && typeof e.preventDefault === "function") e.preventDefault();
 
-  const nameInput = document.getElementById('input-name');
+  const nameInput = document.getElementById("input-name");
   const emailInput = document.getElementById("input-email");
   const messageInput = document.getElementById("input-message");
 
-  const senderName = nameInput.value.trim(); // .trim() removes accidental spaces
+  const senderName = nameInput.value.trim();
   const senderEmail = emailInput.value.trim();
   const senderMessage = messageInput.value.trim();
 
-  // 1. Check Name (Fixed the missing parentheses)
   if (!senderName) {
     alert("Please enter your name.");
-    nameInput.focus(); // ADDED () HERE
+    nameInput.focus();
     return;
   }
 
-  // 2. Check Email exists
   if (!senderEmail) {
     alert("Please enter your email.");
     emailInput.focus();
     return;
   }
 
-  // 3. Check Regex Validity
   if (!validateEmail(senderEmail)) {
     alert("Please enter a valid email address.");
     emailInput.focus();
     return;
   }
 
-  // 4. Check Message
   if (!senderMessage) {
     alert("Please enter a message.");
     messageInput.focus();
@@ -106,9 +218,9 @@ function sendMail(e) {
 
   // Prepare Data
   const now = new Date();
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const seconds = String(now.getSeconds()).padStart(2, "0");
 
   let params = {
     name: senderName,
@@ -118,12 +230,12 @@ function sendMail(e) {
   };
 
   // Send
-  emailjs.send("service_yd52p3d", "template_wxfn3em", params)
+  emailjs
+    .send("service_yd52p3d", "template_wxfn3em", params)
     .then((response) => {
       console.log("EmailJS success:", response);
       alert("Email sent successfully");
-      
-      // Optional: Clear form after success
+
       nameInput.value = "";
       emailInput.value = "";
       messageInput.value = "";
@@ -133,4 +245,3 @@ function sendMail(e) {
       alert("Failed to send email — check console for details.");
     });
 }
-
