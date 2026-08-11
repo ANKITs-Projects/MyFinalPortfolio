@@ -68,6 +68,62 @@ fetch(configUrl)
       educationModule.appendChild(div);
     });
 
+        // Experience Section
+    const experienceContainer = document.getElementById("experience");
+    if (experienceContainer && data.experience && data.experience.length > 0) {
+      experienceContainer.innerHTML = "";
+      data.experience.forEach((exp) => {
+        const dateRange = exp.current
+          ? `${exp.startDate} — <span class="exp-current-badge">Present</span>`
+          : `${exp.startDate} — ${exp.endDate}`;
+        const techTagsHtml = (exp.technologies || [])
+          .map((t) => `<span class="tech-tag">${t}</span>`)
+          .join("");
+        const responsibilitiesHtml = (exp.responsibilities || [])
+          .map((r) => `<li>${r}</li>`)
+          .join("");
+        const achievementsHtml = (exp.achievements || [])
+          .map((a) => `<li><i class="fa-solid fa-trophy"></i> ${a}</li>`)
+          .join("");
+        const companyLink = exp.companyUrl
+          ? `<a href="${exp.companyUrl}" target="_blank" class="exp-company-link">${exp.company} <i class="fa-solid fa-arrow-up-right-from-square"></i></a>`
+          : `<span>${exp.company}</span>`;
+        const card = document.createElement("div");
+        card.className = "exp-card";
+        card.innerHTML = `
+          <div class="exp-card-header">
+            <div class="exp-header-left">
+              <div class="exp-role-badge">${exp.role}</div>
+              <h3 class="exp-company">${companyLink}</h3>
+              <div class="exp-meta">
+                <span class="exp-meta-item"><i class="fa-solid fa-calendar-days"></i> ${dateRange}</span>
+                <span class="exp-meta-item"><i class="fa-solid fa-location-dot"></i> ${exp.location}</span>
+                <span class="exp-meta-item exp-type"><i class="fa-solid fa-briefcase"></i> ${exp.employmentType}</span>
+              </div>
+            </div>
+          </div>
+          <div class="exp-card-body">
+            ${exp.description ? `<p class="exp-description">${exp.description}</p>` : ""}
+            ${responsibilitiesHtml ? `
+            <div class="exp-section">
+              <h4><i class="fa-solid fa-list-check"></i> Responsibilities</h4>
+              <ul class="exp-list">${responsibilitiesHtml}</ul>
+            </div>` : ""}
+            ${achievementsHtml ? `
+            <div class="exp-section">
+              <h4><i class="fa-solid fa-star"></i> Key Achievements</h4>
+              <ul class="exp-list exp-achievements">${achievementsHtml}</ul>
+            </div>` : ""}
+            ${techTagsHtml ? `
+            <div class="exp-tech-stack">
+              ${techTagsHtml}
+            </div>` : ""}
+          </div>
+        `;
+        experienceContainer.appendChild(card);
+      });
+    }
+    
     // Categorized Tech Stack and Tools
     const techStack = document.getElementById("techStack");
     techStack.innerHTML = "";
