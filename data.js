@@ -12,16 +12,11 @@ fetch(configUrl)
     document.getElementById("profileImage").src = data.profileImage;
 
     // --- MERGED RESUME LOGIC ---
-    // Targets both buttons (or just one if you simplify your HTML)
     document.querySelectorAll(".resume-download").forEach((btn) => {
-      // Set href so right-click "Save link as" still works natively
       btn.setAttribute("href", data.resume);
 
       btn.addEventListener("click", (e) => {
         e.preventDefault();
-
-        // --- ACTION 1: OPEN IN NEW TAB (Immediate) ---
-        // We do this first to prevent popup blockers from stopping the tab
         let viewUrl = data.resume;
 
         // Convert Github Raw to jsDelivr for proper viewing in browser
@@ -33,22 +28,16 @@ fetch(configUrl)
         }
         window.open(viewUrl, "_blank");
 
-        // --- ACTION 2: DOWNLOAD IN BACKGROUND ---
-        // Optional: Loading state (store original content)
-        const originalContent = btn.innerHTML;
-
+        // Download in background
         fetch(data.resume)
           .then((response) => response.blob())
           .then((blob) => {
-            // Create a temporary link to force the specific filename
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement("a");
             link.href = url;
             link.download = "Ankit-Gupta-Resume.pdf";
             document.body.appendChild(link);
             link.click();
-
-            // Cleanup
             setTimeout(() => {
               document.body.removeChild(link);
               window.URL.revokeObjectURL(url);
@@ -56,121 +45,138 @@ fetch(configUrl)
           })
           .catch((err) => {
             console.error("Background download failed:", err);
-            // No need to alert aggressively since the tab opened successfully above
           });
       });
     });
 
-    // for about section
+    // About section content
     document.getElementById("about-content").innerText = data.aboutContent;
 
-    // Education cart
+    // Education Timeline
     const educationModule = document.getElementById("education");
+    educationModule.innerHTML = "";
     data.education.forEach((e) => {
       let div = document.createElement("div");
       div.className = "timeline-item";
-      div.innerHTML = `<div class="tl-icon">
-              <i class="fa-solid fa-user-graduate"></i>
-            </div>
-            <p class="tl-duration">${e.year}</p>
-            <h5>${e.degree}</h5>
-            <p>
-              ${e.institution}
-            </p>`;
+      div.innerHTML = `
+        <div class="timeline-item-content">
+          <span class="tl-duration">${e.year}</span>
+          <h5>${e.degree}</h5>
+          <p>${e.institution}</p>
+        </div>
+      `;
       educationModule.appendChild(div);
     });
 
-    // Skills cart (Consolidated Stack and Tools)
+    // Categorized Tech Stack and Tools
     const techStack = document.getElementById("techStack");
-    data.techStack.forEach((e) => {
-      let div = document.createElement("div");
-      div.className = "skill-cart";
-      // Added quotes around src attribute to fix broken images
-      div.innerHTML = `<div class="image">
-              <img src="${e.linke}" alt="${e.title}"> 
-            </div>
-            <h5>${e.title}</h5>`;
-      techStack.appendChild(div);
+    techStack.innerHTML = "";
+
+    const groups = {
+      "Frontend Development": [],
+      "Backend & Databases": [],
+      "Tools & Platforms": []
+    };
+
+    data.techStack.forEach((skill) => {
+      const titleLower = skill.title.toLowerCase();
+      if (
+        ["html", "css", "javascript", "react", "redux", "tailwindcss", "chakraui"].includes(
+          titleLower
+        )
+      ) {
+        groups["Frontend Development"].push(skill);
+      } else if (["nodejs", "express", "mongodb"].includes(titleLower)) {
+        groups["Backend & Databases"].push(skill);
+      } else {
+        groups["Tools & Platforms"].push(skill);
+      }
     });
 
-    // REMOVED duplicate TechTools loop here
+    for (const [groupName, skills] of Object.entries(groups)) {
+      if (skills.length === 0) continue;
 
-    // For Project section
-    const projects = document.getElementById("projects");
+      const groupCard = document.createElement("div");
+      groupCard.className = "skills-category-card";
+
+      let skillsHtml = "";
+      skills.forEach((skill) => {
+        skillsHtml += `
+          <div class="skill-cart">
+            <div class="image">
+              <img src="${skill.linke}" alt="${skill.title}"> 
+            </div>
+            <h5>${skill.title}</h5>
+          </div>
+        `;
+      });
+
+      groupCard.innerHTML = `
+        <h3>${groupName}</h3>
+        <div class="skills-list">
+          ${skillsHtml}
+        </div>
+      `;
+      techStack.appendChild(groupCard);
+    }
+
+    // Projects alternating case-study presentation
+    const projectsContainer = document.getElementById("projects");
+    projectsContainer.innerHTML = "";
+
     data.projects.forEach((e, i) => {
       const div = document.createElement("div");
       div.className = "portfolio-item";
-      // Added quotes around src, href attributes. This fixes broken links.
-      if (i % 2 == 0) {
-        div.innerHTML = `<div class="portfolio-img">
-                          <div class="image">
-                            <img src="${e.image}" alt="${e.title}" />
-                          </div>
-                          <div class="hover-item">
-                            <h3>${e.title}</h3>
-                            <div class="icons">
-                              <a href="${
-                                e.github
-                              }" target="_blank" class="icon">
-                                <i class="fab fa-github"></i>
-                              </a>
-                              <a href="${e.link}" target="_blank" class="icon">
-                                <i class="fa-solid fa-link"></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="portfolio-text left-border">
-                          <a href="${e.link}" target="_blank">
-                            <h4>${e.title}</h4>
-                          </a>
-                          <p class="tech-stack">Tech-Stack :- ${e.tech.join(
-                            ", "
-                          )}</p>
-                          <p style="white-space: pre-line;">
-                            ${e.description}
-                          </p>
-                        </div>`;
+
+      const projectIndex = String(i + 1).padStart(2, "0");
+
+      const imgHtml = `
+        <div class="portfolio-img">
+          <div class="image">
+            <img src="${e.image}" alt="${e.title}" />
+          </div>
+          <div class="hover-item">
+            <h3>${e.title}</h3>
+            <div class="icons">
+              <a href="${e.github}" target="_blank" class="icon">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="${e.link}" target="_blank" class="icon">
+                <i class="fa-solid fa-link"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const textHtml = `
+        <div class="portfolio-text">
+          <span class="project-number">// CASE STUDY ${projectIndex}</span>
+          <a href="${e.link}" target="_blank" style="text-decoration: none;">
+            <h4>${e.title}</h4>
+          </a>
+          <div class="tech-stack">
+            ${e.tech.map((t) => `<span class="tech-tag">${t}</span>`).join("")}
+          </div>
+          <p style="white-space: pre-line;">
+            ${e.description}
+          </p>
+        </div>
+      `;
+
+      if (i % 2 === 0) {
+        div.innerHTML = imgHtml + textHtml;
       } else {
-        div.innerHTML = `<div class="portfolio-text right-border">
-                          <a href="${e.link}" target="_blank">
-                            <h4>${e.title}</h4>
-                          </a>
-                          <p class="tech-stack">Tech-Stack :- ${e.tech.join(
-                            ", "
-                          )}</p>
-                          <p style="white-space: pre-line;">
-                            ${e.description}
-                          </p>
-                        </div>
-                        <div class="portfolio-img">
-                          <div class="image">
-                            <img src="${e.image}" alt="${e.title}" />
-                          </div>
-                          <div class="hover-item">
-                            <h3>${e.title}</h3>
-                            <div class="icons">
-                              <a href="${
-                                e.github
-                              }" target="_blank" class="icon">
-                                <i class="fab fa-github"></i>
-                              </a>
-                              <a href="${e.link}" target="_blank" class="icon">
-                                <i class="fa-solid fa-link"></i>
-                              </a>
-                            </div>
-                          </div>
-                        </div>`;
+        div.innerHTML = textHtml + imgHtml;
       }
 
-      projects.appendChild(div);
+      projectsContainer.appendChild(div);
     });
 
-    // Contact info
+    // Contact info mappings
     document.getElementById("socialsEmail").innerText = data.socials.email;
     document.getElementById("socialsPhone").innerText = data.socials.phone;
-    document.getElementById("socialsLocation").innerText =
-      data.socials.location;
+    document.getElementById("socialsLocation").innerText = data.socials.location;
     document.getElementById("socialsTwitter").href = data.socials.twitter;
     document.getElementById("socialsLinkedin").href = data.socials.linkedin;
     document.getElementById("socialsGithub").href = data.socials.github;
