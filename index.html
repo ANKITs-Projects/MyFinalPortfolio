@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -23,6 +23,9 @@
     />
   </head>
   <body class="main-content">
+    <!-- Neural Node Connection Background -->
+    <canvas id="neural-canvas"></canvas>
+
     <nav class="navbar">
       <div class="nav-logo"><a href="#home">Ankit<span>.</span></a></div>
       <ul class="nav-links">
@@ -33,29 +36,57 @@
         <li><a href="#portfolio">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <div class="theam-btn" title="Theme"></div>
+      <div class="nav-actions">
+        <div class="theam-btn" title="Theme"></div>
+        <button class="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </nav>
 
-    <header class="section" id="home">
+    <header id="home">
       <div class="header-content">
-        <div class="left-header">
-          <div class="h-shape"></div>
-          <div class="image">
-            <img src="" alt="Profile" id="profileImage" />
-          </div>
-        </div>
-        <div class="right-header">
+        <div class="right-header reveal">
+          <span class="section-tag">// AGENT INTERFACE</span>
           <h1>
             Hi, I'm <span class="myname">Ankit Gupta <br /></span>
-            <span id="role"></span>
           </h1>
           <p id="landingPageLine"></p>
 
           <div class="btn-con">
-            <div class="main-btn resume-container">
-              <a href="#" class="resume-download">
-                <span class="btn-text">Resume</span>
-              </a>
+            <a href="#" class="main-btn resume-container resume-download">
+              <i class="fa-solid fa-download"></i> <span class="btn-text">Resume</span>
+            </a>
+            <a href="#contact" class="main-btn btn-secondary">
+              <span>Contact Me</span> <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="left-header reveal">
+          <div class="profile-card">
+            <div class="image">
+              <img src="" alt="Profile" id="profileImage" />
+            </div>
+          </div>
+          <div class="agent-terminal">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span class="terminal-title">agent_status.sh</span>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-line"><span class="prefix">ankit@portfolio:~$</span> <span class="text">init --agent</span></div>
+              <div class="terminal-line"><span class="text" style="color: #64748b;">Initializing neural nodes... SUCCESS</span></div>
+              <div class="terminal-line"><span class="prefix">ankit@portfolio:~$</span> <span class="text">status</span></div>
+              <div class="terminal-line"><span class="text">Role: <span id="role" style="color: var(--accent-secondary);"></span></span></div>
+              <div class="terminal-line"><span class="prefix">ankit@portfolio:~$</span> <span class="text">current_focus --read</span></div>
+              <div class="terminal-line"><span class="text" style="color: var(--text-secondary);">&gt; Scaling MERN stack applications & custom UI designs.</span></div>
             </div>
           </div>
         </div>
@@ -63,142 +94,89 @@
     </header>
 
     <main>
-      <section class="section" id="about">
-        <div class="main-title stat-title">
-          <h2>About <span>me</span> <span class="bg-text">About Me</span></h2>
-        </div>
+      <section id="about" class="reveal">
+        <span class="section-tag">// CORE AGENT BIOGRAPHY</span>
+        <h2 class="section-title">About <span>Me</span></h2>
 
-        <div class="about-container">
-          <div class="left-about">
-            <h4>Information About Me</h4>
+        <div class="about-bento-grid">
+          <div class="bento-card bio-card">
+            <h4><i class="fa-solid fa-terminal"></i> Technical Profile</h4>
             <p id="about-content"></p>
-            <div class="btn-con">
-              <div class="main-btn resume-container">
-                <a href="#" class="resume-download">
-                  <span class="btn-text">Resume</span>
-                </a>
+            <div class="btn-con" style="margin-top: 2rem;">
+              <a href="#" class="main-btn resume-container resume-download">
+                <i class="fa-solid fa-download"></i> <span class="btn-text">Download CV</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="bento-card status-card">
+            <div>
+              <h4><i class="fa-solid fa-network-wired"></i> Status Panel</h4>
+              <div class="status-items">
+                <div class="status-item">
+                  <i class="fa-solid fa-map-marker-alt"></i>
+                  <span class="label">Location:</span>
+                  <span class="val">India</span>
+                </div>
+                <div class="status-item">
+                  <i class="fa-solid fa-briefcase"></i>
+                  <span class="label">Status:</span>
+                  <span class="val">Available</span>
+                </div>
+                <div class="status-item">
+                  <i class="fa-solid fa-circle-nodes"></i>
+                  <span class="label">Stack:</span>
+                  <span class="val">MERN Stack</span>
+                </div>
               </div>
+            </div>
+            <div class="pulse-indicator">
+              <span class="pulse-dot"></span>
+              <span>AGENT ONLINE</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section" id="education_section">
-        <div class="main-title stat-title">
-          <h2>Educa<span>tion</span> <span class="bg-text">Education</span></h2>
-        </div>
-
+      <section id="education_section" class="reveal">
+        <span class="section-tag">// EDUCATION TIMELINE</span>
+        <h2 class="section-title">Educa<span>tion</span></h2>
         <div class="timeline" id="education"></div>
       </section>
 
-      <section class="section" id="skills_section">
-        <div class="main-title stat-title">
-          <h2>My<span>Skills</span> <span class="bg-text">My Skills</span></h2>
+      <section id="skills_section" class="reveal">
+        <span class="section-tag">// STACK CAPABILITIES</span>
+        <h2 class="section-title">My <span>Skills</span></h2>
+        
+        <div class="skills-container" id="techStack">
+          <!-- Dynamic categorized lists injected via JS -->
         </div>
-        <div class="contact-content-con">
-          <div class="left-contact" >
-            <div class="skillsCart" id="skills">
-              <div>
-                <h3>Tech Stack & Tools</h3>
-                <div class="about-skills" id="techStack"></div>
-              </div>
-            </div>
-          </div>
 
-          <div
-            class="right-contact"
-            style="
-              display:  var(--mobile-style);;
-              flex-direction: column;
-              justify-content: flex-start;
-              align-items: flex-start;
-              flex: 0 0 40%;
-              gap: 100px;
-            "
-          >
-           
-            <div
-              style="
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: end;
-                width: 100%;
-              "
-            >
-              <div
-                class="skillsCart"
-                style="
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  align-items: center;
-                  width: 100%;
-                "
-              >
-                <h3>LeetCode Status</h3>
-              </div>
-              <div class="hover-class">
-                  <img
+        <div class="stats-cards-grid">
+          <div class="stats-card-box">
+            <h3>LeetCode Status</h3>
+            <div class="hover-class">
+              <img
                 src="https://leetcard.jacoblin.cool/ankit_gupta6"
                 alt="LeetCode Stats - Ankit Gupta"
               />
-              </div>
-              
             </div>
-             <div
-              style="
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: end;
-                width: 100%;
-              "
-            >
-              <div
-                class="skillsCart"
-                style="
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: center;
-                  align-items: center;
-                  width: 100%;
-                "
-              >
-                <h3>GitHub Status</h3>
-              </div>
-              <div
-                class="hover-class"
-                style="
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  width: 100%;
-                "
-              >
-                <img
-                  src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=ANKITs-Projects&theme=github_dark"
-                  alt="GitHub Summary"
-                  style="
-                    transform: scale(1.2);
-                    max-width: 420px;
-                    width: 100%;
-                    height: auto;
-                    transition: transform 0.3s ease, box-shadow 0.3s ease;
-                  "
-                />
-              </div>
+          </div>
+          <div class="stats-card-box">
+            <h3>GitHub Activity</h3>
+            <div class="hover-class">
+              <img
+                src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=ANKITs-Projects&theme=github_dark"
+                alt="GitHub Summary"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section" id="portfolio">
-        <div class="main-title stat-title">
-          <h2>
-            My <span>Projects</span> <span class="bg-text">my Projects</span>
-          </h2>
-        </div>
+      <section id="portfolio" class="reveal">
+        <span class="section-tag">// RECENT CASE STUDIES</span>
+        <h2 class="section-title">My <span>Projects</span></h2>
         <p class="portfolio-text">
           Here are some of my favorite projects that showcase my skills in
           full-stack web development and problem-solving.
@@ -206,16 +184,13 @@
         <div class="portfolios" id="projects"></div>
       </section>
 
-      <section class="section" id="contact">
-        <div class="main-title stat-title">
-          <h2>
-            Contact <span>ME</span> <span class="bg-text">Contact Me</span>
-          </h2>
-        </div>
+      <section id="contact" class="reveal">
+        <span class="section-tag">// CONNECTION INTERFACE</span>
+        <h2 class="section-title">Contact <span>Me</span></h2>
 
         <div class="contact-content-con">
           <div class="left-contact">
-            <h4>Contact Me Here</h4>
+            <h4>Contact Info</h4>
             <p>
               Let's make a connection! I'd love to collaborate, share ideas, or
               help bring your project to life.
@@ -250,7 +225,7 @@
           </div>
 
           <div class="right-contact">
-            <form class="contact-form">
+            <form class="contact-form" onsubmit="sendMail(event); return false;">
               <div class="input-control">
                 <input
                   type="text"
@@ -265,24 +240,17 @@
                   required
                 />
                 <textarea
-                  name=""
                   id="input-message"
                   cols="15"
                   rows="8"
-                  placeholder="message"
+                  placeholder="Message"
+                  required
                 ></textarea>
               </div>
               <div class="submit-btn">
-                <a
-                  href="#"
-                  onclick="
-                    sendMail(event);
-                    return false;
-                  "
-                  class="main-btn"
-                >
+                <button type="submit" class="main-btn" style="border: none; width: 100%;">
                   <span class="btn-text">Submit</span>
-                </a>
+                </button>
               </div>
             </form>
           </div>
@@ -295,19 +263,20 @@
         <p>Thanks for visiting! Built with ❤️</p>
       </div>
     </footer>
-  </body>
-  <script
-    type="text/javascript"
-    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
-  ></script>
-  <script type="text/javascript">
-    (function () {
-      emailjs.init({
-        publicKey: "maV1vENrx7e_Q8gkS", // Ensure this is your correct public key
-      });
-    })();
-  </script>
 
-  <script src="app.js"></script>
-  <script src="data.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init({
+          publicKey: "maV1vENrx7e_Q8gkS", // Ensure this is your correct public key
+        });
+      })();
+    </script>
+
+    <script src="app.js"></script>
+    <script src="data.js"></script>
+  </body>
 </html>
