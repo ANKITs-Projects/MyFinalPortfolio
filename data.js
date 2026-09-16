@@ -142,7 +142,7 @@ fetch(configUrl)
         )
       ) {
         groups["Frontend Development"].push(skill);
-      } else if (["nodejs", "express", "mongodb", "postgreSql"].includes(titleLower)) {
+      } else if (["nodejs", "express", "mongodb", "postgreSQL"].includes(titleLower)) {
         groups["Backend & Databases"].push(skill);
       } else {
         groups["Tools & Platforms"].push(skill);
