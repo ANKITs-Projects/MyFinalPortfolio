@@ -137,12 +137,12 @@ fetch(configUrl)
     data.techStack.forEach((skill) => {
       const titleLower = skill.title.toLowerCase();
       if (
-        ["html", "css", "javascript", "react", "redux", "tailwindcss", "chakraui"].includes(
+        ["html", "css", "javascript", "react", "next.js", "redux", "tailwindcss", "chakraui"].includes(
           titleLower
         )
       ) {
         groups["Frontend Development"].push(skill);
-      } else if (["nodejs", "express", "mongodb"].includes(titleLower)) {
+      } else if (["nodejs", "express", "mongodb", "postgreSql"].includes(titleLower)) {
         groups["Backend & Databases"].push(skill);
       } else {
         groups["Tools & Platforms"].push(skill);
