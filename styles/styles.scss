@@ -180,6 +180,11 @@ section {
   gap: 2.5rem;
 }
 
+.navbar .nav-links li {
+  display: flex;
+  align-items: center;
+}
+
 .navbar .nav-links li a {
   color: var(--text-secondary);
   font-size: 0.85rem;
@@ -190,6 +195,36 @@ section {
   transition: var(--transition-smooth);
   position: relative;
   padding: 0.5rem 0;
+}
+
+.navbar .nav-links li a.nav-resume-btn {
+  padding: 0.8rem 1.4rem;
+  border-radius: 8px;
+  color: #ffffff;
+  background: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+}
+
+.navbar .nav-links li a.nav-resume-btn::after {
+  display: none;
+}
+
+.navbar .nav-links li a.nav-resume-btn:hover,
+.navbar .nav-links li a.nav-resume-btn.active-link {
+  color: #ffffff;
+  background: var(--accent-primary-hover);
+  transform: translateY(-2px);
 }
 
 .navbar .nav-links li a:hover,
@@ -700,7 +735,7 @@ header#home {
 /* Skills Categories Presentation */
 .skills-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
 }

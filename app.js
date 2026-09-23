@@ -216,32 +216,58 @@ function sendMail(e) {
     return;
   }
 
-  // Prepare Data
   const now = new Date();
   const hours = String(now.getHours()).padStart(2, "0");
   const minutes = String(now.getMinutes()).padStart(2, "0");
   const seconds = String(now.getSeconds()).padStart(2, "0");
 
-  let params = {
+  const params = {
     name: senderName,
     email: senderEmail,
     message: senderMessage,
     time: `${hours}:${minutes}:${seconds}`
   };
 
-  // Send
-  emailjs
-    .send("service_yd52p3d", "template_wxfn3em", params)
-    .then((response) => {
-      console.log("EmailJS success:", response);
-      alert("Email sent successfully");
+  const recipientEmail = window.portfolioContactEmail || "your-email@example.com";
 
-      nameInput.value = "";
-      emailInput.value = "";
-      messageInput.value = "";
-    })
-    .catch((error) => {
-      console.error("EmailJS error:", error);
-      alert("Failed to send email — check console for details.");
-    });
+  if (window.emailjs && typeof window.emailjs.send === "function") {
+    emailjs
+      .send("service_yd52p3d", "template_wxfn3em", params)
+      .then((response) => {
+        console.log("EmailJS success:", response);
+        alert("Email sent successfully");
+
+        nameInput.value = "";
+        emailInput.value = "";
+        messageInput.value = "";
+      })
+      .catch((error) => {
+        console.error("EmailJS failed, using mailto fallback:", error);
+
+        const subject = encodeURIComponent(`Portfolio contact from ${senderName}`);
+        const body = encodeURIComponent(
+          `Name: ${senderName}\nEmail: ${senderEmail}\n\nMessage:\n${senderMessage}`
+        );
+
+        window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+        alert("Your email app is opening. Please send the message from there if the form did not send.");
+
+        nameInput.value = "";
+        emailInput.value = "";
+        messageInput.value = "";
+      });
+    return;
+  }
+
+  const subject = encodeURIComponent(`Portfolio contact from ${senderName}`);
+  const body = encodeURIComponent(
+    `Name: ${senderName}\nEmail: ${senderEmail}\n\nMessage:\n${senderMessage}`
+  );
+
+  window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+  alert("Your email app is opening. Please send the message from there if the form did not send.");
+
+  nameInput.value = "";
+  emailInput.value = "";
+  messageInput.value = "";
 }

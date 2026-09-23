@@ -128,39 +128,36 @@ fetch(configUrl)
     const techStack = document.getElementById("techStack");
     techStack.innerHTML = "";
 
-    const groups = {
-      "Frontend Development": [],
-      "Backend & Databases": [],
-      "Tools & Platforms": []
-    };
+    const groups = {};
 
     data.techStack.forEach((skill) => {
-      const titleLower = skill.title.toLowerCase();
-      if (
-        ["html", "css", "javascript", "react", "next.js", "redux", "tailwindcss", "chakraui"].includes(
-          titleLower
-        )
-      ) {
-        groups["Frontend Development"].push(skill);
-      } else if (["nodejs", "express", "mongodb", "postgresql"].includes(titleLower)) {
-        groups["Backend & Databases"].push(skill);
-      } else {
-        groups["Tools & Platforms"].push(skill);
+      const category = (skill.category || "Other").trim();
+      if (!groups[category]) {
+        groups[category] = [];
       }
+      groups[category].push(skill);
     });
 
     for (const [groupName, skills] of Object.entries(groups)) {
-      if (skills.length === 0) continue;
+      if (!skills || skills.length === 0) continue;
 
       const groupCard = document.createElement("div");
       groupCard.className = "skills-category-card";
 
       let skillsHtml = "";
       skills.forEach((skill) => {
+        const imageSrc = skill.linke || skill.image || skill.icon || "";
+        const fallbackText = (skill.title || "SK")
+          .split(" ")
+          .map((word) => word[0])
+          .join("")
+          .slice(0, 2)
+          .toUpperCase();
+
         skillsHtml += `
           <div class="skill-cart">
-            <div class="image">
-              <img src="${skill.linke}" alt="${skill.title}"> 
+            <div class="image ${imageSrc ? "" : "fallback-skill-icon"}">
+              ${imageSrc ? `<img src="${imageSrc}" alt="${skill.title}">` : `<span>${fallbackText}</span>`}
             </div>
             <h5>${skill.title}</h5>
           </div>
@@ -230,6 +227,8 @@ fetch(configUrl)
     });
 
     // Contact info mappings
+    window.portfolioContactEmail = data.socials.email;
+
     document.getElementById("socialsEmail").innerText = data.socials.email;
     document.getElementById("socialsPhone").innerText = data.socials.phone;
     document.getElementById("socialsLocation").innerText = data.socials.location;
